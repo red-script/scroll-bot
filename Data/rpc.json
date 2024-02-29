@@ -1,0 +1,19 @@
+{
+  "ethereum": {
+    "rpc": ["https://rpc.ankr.com/eth"],
+    "explorer": "https://etherscan.io/tx/",
+    "token": "ETH"
+  },
+
+  "scroll": {
+    "rpc": ["https://rpc.scroll.io"],
+    "explorer": "https://scrollscan.com/tx/",
+    "token": "ETH"
+  },
+
+  "sepolia": {
+    "rpc": [""],
+    "explorer": "https://sepolia.etherscan.io",
+    "token": "ETH"
+  }
+}

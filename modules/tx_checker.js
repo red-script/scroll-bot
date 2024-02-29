@@ -1,32 +1,55 @@
-const Web3 = require('web3');
-const { Account } = require('eth-lib');
-const { table } = require('table');
-
-const { ACCOUNTS, RPC } = require('./config');
+import { ethers } from "ethers";
+import winston from "winston";
+import { RPC, ACCOUNTS } from "../config.js";
+import _ from "lodash";
+import Table from "table";
 
 async function getNonce(address) {
-    const web3 = new Web3(new Web3.providers.HttpProvider(randomRpcUrl()));
-    const nonce = await web3.eth.getTransactionCount(address);
+  try {
+    const rpcUrl = _.sample(RPC.sepolia.rpc);
+
+    const provider = new ethers.JsonRpcProvider(rpcUrl);
+    const nonce = await provider.getTransactionCount(address);
     return nonce;
+  } catch (error) {
+    console.error("Error in getNonce:", error.message);
+    throw error;
+  }
 }
 
-async function checkTx() {
-    console.log("Start transaction checker");
-    const tasks = ACCOUNTS.map(async (pk, index) => {
-        const address = Account.fromPrivate(pk).address;
-        const nonce = await getNonce(address);
-        return [index + 1, address, nonce];
-    });
+export async function checkTx() {
+  try {
+    winston.info("Start transaction checker");
+    const tasks = [];
 
-    const result = await Promise.all(tasks);
-    const tableData = [['#', 'Address', 'Nonce'], ...result];
-    console.log(table(tableData));
+    for (const [index, privateKey] of ACCOUNTS.entries()) {
+      const wallet = new ethers.Wallet(privateKey);
+      tasks.push(
+        getNonce(wallet.address)
+          .then((nonce) => [index + 1, wallet.address, nonce])
+          .catch((error) => [
+            index + 1,
+            wallet.address,
+            "Error:" + error.message,
+          ])
+      );
+    }
+
+    const results = await Promise.all(tasks);
+
+    const data = results.map((row) => [row[0], row[1], row[2]]);
+    const config = {
+      columns: {
+        0: { alignment: "center" },
+        1: { alignment: "center" },
+        2: { alignment: "center" },
+      },
+    };
+    const table = Table.table(data, config);
+
+    console.log(table);
+    winston.info(table);
+  } catch (error) {
+    winston.error("Error in checkTx:", error.message);
+  }
 }
-
-function randomRpcUrl() {
-    const rpcUrls = RPC.scroll.rpc;
-    const randomIndex = Math.floor(Math.random() * rpcUrls.length);
-    return rpcUrls[randomIndex];
-}
-
-checkTx();
