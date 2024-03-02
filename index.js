@@ -16,7 +16,7 @@ async function getModule() {
         message: "Select a method to get started",
         choices: [
           { value: "tx_checker", name: "14) Check transaction count" },
-          { name: "hello mate" },
+          { value: "exitProgram", name: "15 Exit" },
         ],
       },
     ]);
@@ -71,12 +71,19 @@ async function main(module) {
   await Promise.all(tasks);
 }
 
+function exitProgram() {
+  console.log("Exiting the program...");
+  process.exit(0);
+}
+
 (async () => {
   winston.add(new winston.transports.File({ filename: "logfile.log" }));
 
   const module = await getModule();
   if (module === "tx_checker") {
     get_tx_count();
+  } else if (module === "exitProgram") {
+    exitProgram();
   } else {
     main(module);
   }
@@ -96,5 +103,3 @@ async function main(module) {
 //           { value: sendMail, name: "11) Dmail send email" },
 //           { value: deployContract, name: "12) Deploy contract" },
 // { value: customRoutes, name: "13) Use custom routes" },
-          
-// { value: exitProgram, name: "15 Exit" },

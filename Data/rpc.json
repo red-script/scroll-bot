@@ -12,7 +12,7 @@
   },
 
   "sepolia": {
-    "rpc": [""],
+    "rpc": ["https://sepolia.infura.io/v3/"],
     "explorer": "https://sepolia.etherscan.io",
     "token": "ETH"
   }
