@@ -1,9 +1,8 @@
-import _ from lodash;
-import ethers from ethers;
-import { sha256 } from "crypto";
+import _ from "lodash";
+import { crypto } from "crypto";
 import winston from "winston";
-import { DMAIL_CONTRACT, DMAIL_ABI } from "./config";
-import { checkGas } from "./utils/gas_checker";
+import { DMAIL_CONTRACT, DMAIL_ABI } from "../config";
+import { checkGas } from "./utils/gas_checker"; //decorators for check gas and retry
 import { retry } from "./utils/helpers";
 import { Account } from "./account";
 
@@ -15,12 +14,21 @@ class Dmail extends Account {
 
   async sendMail() {
     try {
-      logger.info(`[${this.accountId}][${this.address}] Send email`);
+      winston.info(`[${this.accountId}][${this.address}] Send email`);
 
-      const email = sha256(`${1e11 * Math.random()}`).toString("hex");
-      const theme = sha256(`${1e11 * Math.random()}`).toString("hex");
+      const email = crypto
+        .createHash("sha256")
+        .update(_.random(1e11).toString())
+        .digest("hex");
+      const theme = crypto
+        .createHash("sha256")
+        .update(_.random(1e11).toString())
+        .digest("hex");
 
-      const txData = await this.contract.populateTransaction.send_mail(email, theme);
+      const txData = await this.contract.populateTransaction.send_mail(
+        email,
+        theme
+      );
       txData.gasPrice = await this.w3.eth.getGasPrice();
 
       const signedTx = await this.sign(txData);

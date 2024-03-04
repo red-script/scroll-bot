@@ -1,18 +1,14 @@
-const settings = {
-  RANDOM_WALLET: True,
+export const RANDOM_WALLET = true;
 
-  QUANTITY_RUN_ACCOUNTS: 5,
+export const QUANTITY_RUN_ACCOUNTS = 5;
 
-  SLEEP_FROM: 500, // Milliseconds
-  SLEEP_TO: 1000, // Milliseconds
+export const SLEEP_FROM = 500; // Milliseconds
+export const SLEEP_TO = 1000; // Milliseconds
 
-  MAX_PRIORITY_FEE: {
-    ethereum: 0.01,
-  },
-
-  GAS_MULTIPLIER: 1,
-
-  RETRY_COUNT: 3,
+export const MAX_PRIORITY_FEE = {
+  ethereum: 0.01,
 };
 
-export default settings;
+export const GAS_MULTIPLIER = 1;
+
+export const RETRY_COUNT = 3;
