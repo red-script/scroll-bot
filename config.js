@@ -16,6 +16,9 @@ const NFTS2ME_ABI = JSON.parse(
 const OMNISEA_ABI = JSON.parse(
   fs.readFileSync("./Data/abi/omnisea/abi.json", "utf-8")
 );
+const WETH_ABI = JSON.parse(
+  fs.readFileSync("./Data/abi/scroll/weth.json", "utf-8")
+);
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
