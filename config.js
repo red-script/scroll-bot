@@ -19,6 +19,9 @@ const OMNISEA_ABI = JSON.parse(
 const WETH_ABI = JSON.parse(
   fs.readFileSync("./Data/abi/scroll/weth.json", "utf-8")
 );
+const ZERIUS_ABI = JSON.parse(
+  fs.readFileSync("./Data/abi/zerius/abi.json", "utf-8")
+);
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -30,6 +33,7 @@ const SCROLL_TOKENS = {
 
 const DMAIL_CONTRACT = "0x47fbe95e981c0df9737b6971b451fb15fdc989d9";
 const OMNISEA_CONTRACT = "0x46ce46951d12710d85bc4fe10bb29c6ea5012077";
+const ZERIUS_CONTRACT = "0xeb22c3e221080ead305cae5f37f0753970d973cd";
 
 export {
   RPC,
@@ -41,4 +45,7 @@ export {
   NFTS2ME_ABI,
   OMNISEA_ABI,
   OMNISEA_CONTRACT,
+  WETH_ABI,
+  ZERIUS_CONTRACT,
+  ZERIUS_ABI,
 };
