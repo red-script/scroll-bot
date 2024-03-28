@@ -34,6 +34,18 @@ const SYNCSWAP_CLASSIC_POOL_DATA_ABI = JSON.parse(
 const LAYERBANK_ABI = JSON.parse(
   fs.readFileSync("./Data/abi/layerbank/abi.json", "utf-8")
 );
+const SAFE_ABI = JSON.parse(
+  fs.readFileSync("./Data/abi/gnosis/abi.json", "utf-8")
+);
+const ZKSTARS_ABI = JSON.parse(
+  fs.readFileSync("./Data/abi/zkstars/abi.json", "utf-8")
+);
+const ZEBRA_ROUTER_ABI = JSON.parse(
+  fs.readFileSync("./Data/abi/zebra/abi.json", "utf-8")
+);
+const ROCKETSAM_ABI = JSON.parse(
+  fs.readFileSync("./Data/abi/rocketsam/abi.json", "utf-8")
+);
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -52,6 +64,11 @@ const SYNCSWAP_CONTRACTS = {
 };
 const LAYERBANK_CONTRACT = "0xec53c830f4444a8a56455c6836b5d2aa794289aa";
 const LAYERBANK_WETH_CONTRACT = "0x274C3795dadfEbf562932992bF241ae087e0a98C";
+
+const SAFE_CONTRACT = "0xa6b71e26c5e0845f74c812102ca7114b6a896ab2";
+const ZEBRA_CONTRACTS = {
+  router: "0x0122960d6e391478bfe8fb2408ba412d5600f621",
+};
 
 const DMAIL_CONTRACT = "0x47fbe95e981c0df9737b6971b451fb15fdc989d9";
 const OMNISEA_CONTRACT = "0x46ce46951d12710d85bc4fe10bb29c6ea5012077";

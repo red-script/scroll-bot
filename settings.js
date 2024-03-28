@@ -1,5 +1,7 @@
 export const RANDOM_WALLET = true;
 
+//export const REMOVE_WALLET = false;
+
 export const QUANTITY_RUN_ACCOUNTS = 5;
 
 export const SLEEP_FROM = 500; // Milliseconds
