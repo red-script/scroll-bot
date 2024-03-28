@@ -18,11 +18,23 @@ class Account {
     this.address = this.wallet.address;
   }
 
-  async getTxData() {
+  async getTxData(value = 0, gasPrice = true) {
     try {
       const chainId = await this.provider.getChainId();
       const nonce = await this.provider.getTransactionCount(this.address);
-      const tx = { chainId: chainId, from: this.address, nonce: nonce };
+
+      const tx = {
+        chainId: chainId,
+        from: this.address,
+        value: value,
+        nonce: nonce,
+      };
+
+      if (gasPrice) {
+        const gasPrice = await this.provider.getGasPrice();
+        tx.gasPrice = gasPrice;
+      }
+
       return tx;
     } catch (error) {
       console.error("Error in getTxData:", error.message);
@@ -142,7 +154,6 @@ class Account {
 
         // Get transaction data
         const txData = await this.getTxData();
-        txData.gasPrice = await provider.getGasPrice();
 
         // Build transaction
         const transaction = await contract.populateTransaction.approve(
@@ -223,3 +234,5 @@ class Account {
     return tx.hash;
   }
 }
+
+module.exports = Account;

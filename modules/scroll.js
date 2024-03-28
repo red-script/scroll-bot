@@ -34,9 +34,7 @@ class Scroll extends Account {
 
       info(`[${this.accountId}][${this.address}] Wrap ${amount} ETH`);
 
-      const txData = await this.getTxData();
-      txData.value = amountWei;
-      txData.gasPrice = await this.w3.eth.getGasPrice();
+      const txData = await this.getTxData(amountWei);
 
       const transaction = await wethContract.methods.deposit().send(txData);
 
@@ -76,7 +74,6 @@ class Scroll extends Account {
       info(`[${this.accountId}][${this.address}] Unwrap ${amount} ETH`);
 
       const txData = await this.getTxData();
-      txData.gasPrice = await this.w3.eth.getGasPrice();
 
       const transaction = await wethContract.methods
         .withdraw(amountWei)

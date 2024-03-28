@@ -16,7 +16,6 @@ class Minter extends Account {
 
       const contract = this.getContract(_.sample(contracts), NFTS2ME_ABI);
       const txData = await this.getTxData();
-      txData.gasPrice = await this.w3.eth.getGasPrice();
 
       const transaction = await contract.methods.mint(1).send(txData);
       const signedTxn = await this.sign(transaction);

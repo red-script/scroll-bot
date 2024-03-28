@@ -209,6 +209,40 @@ import { checkTx } from "./modules/tx_checker.js";
 //   );
 // }
 
+async function deposit_layerbank(accountId, key) {
+  // Make deposit on LayerBank
+  // ______________________________________________________
+  // make_withdraw - True, if need withdraw after deposit
+  // all_amount - deposit from min_percent to max_percent
+
+  const minAmount = 0.0001;
+  const maxAmount = 0.0002;
+  const decimal = 5;
+
+  const sleepFrom = 5;
+  const sleepTo = 24;
+
+  const makeWithdraw = true;
+
+  const allAmount = true;
+
+  const minPercent = 5;
+  const maxPercent = 10;
+
+  const layerbank = new LayerBank(accountId, key);
+  await layerbank.deposit(
+    minAmount,
+    maxAmount,
+    decimal,
+    sleepFrom,
+    sleepTo,
+    makeWithdraw,
+    allAmount,
+    minPercent,
+    maxPercent
+  );
+}
+
 // async function mint_nft(account_id, key, recipient) {
 //   // Mint NFT on NFTS2ME
 //   // ______________________________________________________
@@ -223,6 +257,10 @@ import { checkTx } from "./modules/tx_checker.js";
 // #########################################
 // ########### NO NEED TO CHANGE ###########
 // #########################################
+async function withdraw_layerbank(account_id, key) {
+  layerbank = Layerbank(account_id, key);
+  await layerbank.withdraw();
+}
 
 // async function send_mail(account_id, key, recipient) {
 //   dmail = Dmail(account_id, key, recipient);

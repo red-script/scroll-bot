@@ -41,9 +41,7 @@ class Zerius extends Account {
 
     const mintFee = await this.contract.methods.mintFee().call();
 
-    const txData = await this.getTxData();
-    txData.value = mintFee;
-    txData.gasPrice = await this.w3.eth.getGasPrice();
+    const txData = await this.getTxData(mintFee);
 
     const transaction = this.contract.methods.mint().encodeABI();
     const signedTxn = await this.sign(transaction);
@@ -64,9 +62,7 @@ class Zerius extends Account {
     const l0Fee = await this.getEstimateFee(chainId, nftId);
     const baseBridgeFee = await this.contract.methods.bridgeFee().call();
 
-    const txData = await this.getTxData();
-    txData.value = l0Fee + baseBridgeFee;
-    txData.gasPrice = await this.w3.eth.getGasPrice();
+    const txData = await this.getTxData(l0Fee + baseBridgeFee);
 
     const transaction = this.contract.methods
       .sendFrom(

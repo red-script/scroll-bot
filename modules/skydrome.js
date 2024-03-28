@@ -26,9 +26,7 @@ class Skydrome extends Account {
   }
 
   async swapToToken(fromToken, toToken, amount, slippage) {
-    const txData = await this.getTxData();
-    txData.value = amount;
-    txData.gasPrice = await this.w3.eth.getGasPrice();
+    const txData = await this.getTxData(amount);
 
     const deadline = Math.floor(Date.now() / 1000) + 1000000;
 
@@ -57,8 +55,6 @@ class Skydrome extends Account {
     await this.approve(amount, tokenAddress, SKYDROME_CONTRACTS.router);
 
     const txData = await this.getTxData();
-    txData.gasPrice = await this.w3.eth.getGasPrice();
-    txData.nonce = await this.w3.eth.getTransactionCount(this.address);
 
     const deadline = Math.floor(Date.now() / 1000) + 1000000;
 

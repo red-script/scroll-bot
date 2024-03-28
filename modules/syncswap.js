@@ -81,10 +81,7 @@ class SyncSwap extends Account {
         txData.value = amountWei;
       } else {
         await this.approve(amountWei, tokenAddress, SYNCSWAP_CONTRACTS.router);
-        txData.nonce = await this.w3.eth.getTransactionCount(this.address);
       }
-
-      txData.gasPrice = await this.w3.eth.getGasPrice();
 
       const minAmountOut = await this.getMinAmountOut(
         poolAddress,

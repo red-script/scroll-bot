@@ -31,6 +31,9 @@ const SYNCSWAP_CLASSIC_POOL_ABI = JSON.parse(
 const SYNCSWAP_CLASSIC_POOL_DATA_ABI = JSON.parse(
   fs.readFileSync("./Data/abi/syncswap/classic_pool_data.json", "utf-8")
 );
+const LAYERBANK_ABI = JSON.parse(
+  fs.readFileSync("./Data/abi/layerbank/abi.json", "utf-8")
+);
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
@@ -47,6 +50,9 @@ const SYNCSWAP_CONTRACTS = {
   router: "0x80e38291e06339d10aab483c65695d004dbd5c69",
   classic_pool: "0x37bac764494c8db4e54bde72f6965bea9fa0ac2d",
 };
+const LAYERBANK_CONTRACT = "0xec53c830f4444a8a56455c6836b5d2aa794289aa";
+const LAYERBANK_WETH_CONTRACT = "0x274C3795dadfEbf562932992bF241ae087e0a98C";
+
 const DMAIL_CONTRACT = "0x47fbe95e981c0df9737b6971b451fb15fdc989d9";
 const OMNISEA_CONTRACT = "0x46ce46951d12710d85bc4fe10bb29c6ea5012077";
 const ZERIUS_CONTRACT = "0xeb22c3e221080ead305cae5f37f0753970d973cd";

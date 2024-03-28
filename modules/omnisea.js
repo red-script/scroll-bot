@@ -32,7 +32,6 @@ class Omnisea extends Account {
       const { title, symbol } = Omnisea.generateCollectionData();
 
       const txData = await this.getTxData();
-      txData.gasPrice = await this.w3.eth.getGasPrice();
 
       const unixTime = Math.floor(new Date().getTime() / 1000) + 1000000;
 
